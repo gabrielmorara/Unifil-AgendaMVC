@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0f2e4b2-c54d-4361-942e-280665f80dcb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Contact.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Groups.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Phones.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/ConnectionDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/CreateTables.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/ServiceDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Models/Contact.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Models/ContactsGroups.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Models/ContactsPhones.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Models/Groups.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Models/Phones.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +33,6 @@
         <option value="C:\Users\labinfo\Desktop\GM\LABIII\agenda-db\agenda_db\.idea" />
       </set>
     </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="814" />
-    <option name="height" value="867" />
   </component>
   <component name="ProjectId" id="1QLiylu91FHo8odDOWSPjVHxuPM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -70,7 +70,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="View.Main" />
       <module name="agenda_db_sqlite" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -92,7 +92,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567464466209</updated>
-      <workItem from="1567556567962" duration="2702000" />
+      <workItem from="1567556567962" duration="2909000" />
+      <workItem from="1568067438591" duration="4200000" />
     </task>
     <servers />
   </component>
@@ -104,7 +105,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

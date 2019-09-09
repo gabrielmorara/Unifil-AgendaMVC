@@ -1,17 +1,8 @@
+package Models;
+
 public class Contact {
     private int contact_id;
     private String firstName;
-
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "contact_id=" + contact_id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
     private String lastName;
     private String email;
 
@@ -52,5 +43,16 @@ public class Contact {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Models.Contact{" +
+                "contact_id=" + contact_id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

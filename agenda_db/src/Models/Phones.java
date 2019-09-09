@@ -1,3 +1,5 @@
+package Models;
+
 public class Phones {
     private int phone_id;
     private String phone;

@@ -1,3 +1,5 @@
+package Models;
+
 public class Groups {
     private int group_id;
     private String name;
