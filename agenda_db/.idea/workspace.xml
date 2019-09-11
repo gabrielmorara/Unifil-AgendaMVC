@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0f2e4b2-c54d-4361-942e-280665f80dcb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/ConnectionDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/CreateTables.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/ServiceDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Contact.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/ContactsGroups.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/ContactsPhones.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Groups.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Phones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/agenda_db_sqlite/Contact.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/agenda_db_sqlite/Groups.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/agenda_db_sqlite/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/agenda_db_sqlite/Phones.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ServiceDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ServiceDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +91,8 @@
       <option name="presentableId" value="Default" />
       <updated>1567464466209</updated>
       <workItem from="1567556567962" duration="2909000" />
-      <workItem from="1568067438591" duration="4200000" />
+      <workItem from="1568067438591" duration="4473000" />
+      <workItem from="1568159268071" duration="4735000" />
     </task>
     <servers />
   </component>
