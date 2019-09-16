@@ -40,7 +40,7 @@ public class ServiceDB {
     }
 
     public static String insertGroup(String name) {
-        return "insert into groups(name) values ('" + name + ")";
+        return "insert into groups(name) values ('" + name + "')";
     }
 
     public static String insertGroupsContact(int group_id, int contactId) {
@@ -63,6 +63,20 @@ public class ServiceDB {
         return "select * from groups";
     }
 
+    public static String getAllTelefones() {
+        return "select * from phones";
+    }
+
+    public static String getTelefoneByContactId(String id) {
+        return "select * from phones p " +
+                "join contact_phone cp on p.phone_id = cp.phone_id " +
+                "join contacts c on c.contact_id = cp.contact_id where c.contact_id = " + id;
+    }
+    public static String getGrupoByContactId(String id) {
+        return "select * from groups p " +
+                "join contact_groups cp on p.group_id = cp.group_id " +
+                "join contacts c on c.contact_id = cp.contact_id where c.contact_id = " + id;
+    }
     public static String getPhoneById(int id) {
         return "select * from phones where phone_id " + " = " + id;
     }
@@ -97,7 +111,7 @@ public class ServiceDB {
         return list;
     }
 
-    public static List<Groups> selectDBCGroups(String query, Connection conn) {
+    public static List<Groups> selectDBGroups(String query, Connection conn) {
         List<Groups> list = new ArrayList<>();
         try (Statement statement = conn.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {

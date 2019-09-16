@@ -1,6 +1,14 @@
 package Models;
 
 public class Phones {
+    @Override
+    public String toString() {
+        return "Phones{" +
+                "phone_id=" + phone_id +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
+
     private int phone_id;
     private String phone;
 

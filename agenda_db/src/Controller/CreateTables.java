@@ -1,6 +1,7 @@
 package Controller;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -8,6 +9,7 @@ public class CreateTables {
 
     public static void createtables(Connection conexao) {
         try {
+            conexao = DriverManager.getConnection("jdbc:sqlite:db:sqlite");
             Statement stmt = conexao.createStatement();
             String table_groups = "CREATE TABLE groups ( " +
                     "group_id INTEGER PRIMARY KEY AUTOINCREMENT, " +

@@ -24,4 +24,12 @@ public class Groups {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Groups{" +
+                "group_id=" + group_id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
