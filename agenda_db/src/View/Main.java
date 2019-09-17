@@ -11,9 +11,8 @@ import java.util.Scanner;
 
 import static Controller.ContactController.*;
 import static Controller.CreateTables.createtables;
-import static Controller.GroupController.inserirGrupo;
-import static Controller.PhoneController.getAllTelefone;
-import static Controller.PhoneController.inserirTelefone;
+import static Controller.GroupController.*;
+import static Controller.PhoneController.*;
 import static Controller.ServiceDB.*;
 
 public class Main {
@@ -22,31 +21,24 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         Connection connection = ConnectionDB.createConnection();
+        createtables(connection);
         int opcao = 0;
-        while (opcao != 9) {
+        while (opcao != 99) {
             getMenu();
             opcao = scanner.nextInt();
             switch (opcao) {
                 case 1:
-                    System.out.println("Digite o nome :");
-                    String firstNome = scanner.next();
-                    System.out.println("Digite o sobrenome :");
-                    String lastName = scanner.next();
-                    System.out.println("Digite o email :");
-                    String email = scanner.next();
-                    int id_contact = inserirContato(connection, firstNome, lastName, email);
+                    int id_contact = inserirContato(connection);
                     int aux;
                     do {
-                        System.out.println("Digite o telefone :");
-                        String telefoneAdd = scanner.next();
-                        int id_telefone = inserirTelefone(connection, telefoneAdd);
+                        int id_telefone = inserirTelefone(connection);
                         vincularContatoTelefone(connection, id_contact, id_telefone);
                         System.out.println("1 - Cadastrar mais telefone");
                         System.out.println("2 - Prosseguir");
                         aux = scanner.nextInt();
                     } while (aux == 1);
                     System.out.println("1 - Vincular a grupo existente");
-                    System.out.println("2 - Cadastrar novo grupo");
+                    System.out.println("2 - Cadastrar novo grupo e vincular");
                     System.out.println("3 - Finalizar sem grupo");
                     aux = scanner.nextInt();
                     if (aux == 1) {
@@ -61,43 +53,53 @@ public class Main {
                         } while (aux == 1);
                     }
                     if (aux == 2) {
-                        System.out.println("Digit o nome do grupo: ");
-                        String nome_grupo = scanner.next();
-                        inserirGrupo(connection, nome_grupo);
+                        int id_grupo = inserirGrupo(connection);
+                        vincularContatoGrupo(connection, id_grupo, id_contact);
                     }
                     System.out.println("Contato cadastrado com sucesso!");
                     System.out.println(ServiceDB.selectDBContact(ServiceDB.getContactbyId(id_contact), connection));
                     break;
                 case 2:
-                    System.out.println("Digite o telefone :");
-                    String telefoneAdd = scanner.next();
-                    int id_telefone = inserirTelefone(connection, telefoneAdd);
+                    inserirTelefone(connection);
                     break;
                 case 3:
-                    System.out.println("Digite o nome do grupo : ");
-                    String nome_grupo = scanner.next();
-                    inserirGrupo(connection, nome_grupo);
+                    inserirGrupo(connection);
                     break;
                 case 4:
-//                    System.out.println(getAllContacts(connection));
-                    System.out.println("Digite o id do contato : ");
-                    int id_contato = scanner.nextInt();
-                    System.out.println("Digite o id do telefone : ");
-                    System.out.println(getAllTelefone(connection));
-                    int id_phone = scanner.nextInt();
-                    vincularContatoTelefone(connection, id_contato, id_phone);
+                    vincularContatoTelefone(connection);
                     break;
                 case 5:
-//                    System.out.println(getAllContacts(connection));
-                    System.out.println("Digite o id do contato : ");
-                    id_contato = scanner.nextInt();
-                    System.out.println("Digite o id do grupo : ");
-//                    System.out.println(getAllContacts(connection));
-                    int id_grupo = scanner.nextInt();
-                    vincularContatoGrupo(connection, id_grupo, id_contato);
+                    desvincularContatoTelefone(connection);
                     break;
                 case 6:
+                    vincularContatoGrupo(connection);
+                    break;
+                case 7:
+                    desvincularContatoGrupo(connection);
+                    break;
+                case 8:
                     getAllContacts(connection);
+                    break;
+                case 9:
+                    System.out.println(getAllTelefone(connection));
+                    break;
+                case 10:
+                    System.out.println(getAllgrop(connection));
+                    break;
+                case 11:
+                    getContactById(connection);
+                    break;
+                case 12:
+                    getContactByName(connection);
+                    break;
+                case 14:
+                    removerContact(connection);
+                    break;
+                case 15:
+                    removerTelefone(connection);
+                    break;
+                case 16:
+                    removerGroup(connection);
                     break;
                 default:
                     System.out.println("Opção Invalida!");
@@ -110,12 +112,17 @@ public class Main {
         System.out.println("2 - Inserir Telefone");
         System.out.println("3 - Inserir Grupo");
         System.out.println("4 - Vincular Telefone com Contato");
-        System.out.println("5 - Vincular Contato com Grupo");
-        System.out.println("6 - Listar Todos Contatos");
-        System.out.println("7 - Buscar contato por Id");
-        System.out.println("8 - Buscar contato por Nome");
+        System.out.println("5 - Desvincular Telefone com Contato");
+        System.out.println("6 - Vincular Contato com Grupo");
+        System.out.println("7 - Desvincular Contato com Grupo");
+        System.out.println("8 - Listar Todos Contatos");
         System.out.println("9 - Listar todos os Telefones");
         System.out.println("10 - Listar todos os Grupos");
+        System.out.println("11 - Buscar contato por Id");
+        System.out.println("12 - Buscar contato por Nome");
+        System.out.println("14 - Remover Contato");
+        System.out.println("15 - Remover Telefone");
+        System.out.println("16 - Remover Grupo");
         System.out.println("99 - Encerrar o programa");
     }
 }

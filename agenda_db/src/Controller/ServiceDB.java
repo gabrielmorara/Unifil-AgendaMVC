@@ -72,11 +72,13 @@ public class ServiceDB {
                 "join contact_phone cp on p.phone_id = cp.phone_id " +
                 "join contacts c on c.contact_id = cp.contact_id where c.contact_id = " + id;
     }
+
     public static String getGrupoByContactId(String id) {
         return "select * from groups p " +
                 "join contact_groups cp on p.group_id = cp.group_id " +
                 "join contacts c on c.contact_id = cp.contact_id where c.contact_id = " + id;
     }
+
     public static String getPhoneById(int id) {
         return "select * from phones where phone_id " + " = " + id;
     }
@@ -123,6 +125,16 @@ public class ServiceDB {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static void delete(String query, Connection conn) {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+            System.out.println("Removido com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c0f2e4b2-c54d-4361-942e-280665f80dcb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/ContactController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/GroupController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/PhoneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/agenda_db_sqlite/Contact.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/agenda_db_sqlite/Groups.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/agenda_db_sqlite/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/agenda_db_sqlite/Phones.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CreateTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CreateTables.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ServiceDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ServiceDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Groups.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Groups.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Phones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Phones.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="c0f2e4b2-c54d-4361-942e-280665f80dcb" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,22 +22,22 @@
     <expand>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="SQLite - db" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="SQLite - db" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="SQLite - db" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="SQLite - db" type="feb32156:DbDataSourceImpl" />
         <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
     </expand>
@@ -67,7 +51,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
@@ -76,14 +60,10 @@
       </set>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="814" />
-    <option name="height" value="867" />
-  </component>
   <component name="ProjectId" id="1QLiylu91FHo8odDOWSPjVHxuPM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -92,7 +72,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568671601765" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/db" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -165,6 +145,7 @@
       <workItem from="1568067438591" duration="4473000" />
       <workItem from="1568159268071" duration="4809000" />
       <workItem from="1568671900626" duration="4942000" />
+      <workItem from="1568738998953" duration="5615000" />
     </task>
     <servers />
   </component>

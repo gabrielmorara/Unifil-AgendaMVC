@@ -11,24 +11,24 @@ public class CreateTables {
         try {
             conexao = DriverManager.getConnection("jdbc:sqlite:db:sqlite");
             Statement stmt = conexao.createStatement();
-            String table_groups = "CREATE TABLE groups ( " +
+            String table_groups = "CREATE TABLE IF NOT EXISTS groups ( " +
                     "group_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "name TEXT )";
-            String table_contacts = "CREATE TABLE contacts ( " +
+            String table_contacts = "CREATE TABLE IF NOT EXISTS contacts  ( " +
                     "contact_id INTEGER  PRIMARY KEY AUTOINCREMENT, " +
                     "first_name TEXT, " +
                     "last_name TEXT," +
                     "email TEXT)";
-            String table_phones = "CREATE TABLE phones ( " +
+            String table_phones = "CREATE TABLE IF NOT EXISTS phones ( " +
                     "phone_id INTEGER  PRIMARY KEY AUTOINCREMENT, " +
                     "phone TEXT)";
-            String contact_phone = "CREATE TABLE contact_phone ( " +
+            String contact_phone = "CREATE TABLE IF NOT EXISTS contact_phone  ( " +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "contact_id INTEGER," +
                     "phone_id INTEGER, " +
                     "FOREIGN KEY (phone_id) REFERENCES phones (phone_id)," +
                     "FOREIGN KEY (contact_id) REFERENCES contacts (contact_id))";
-            String contact_groups = "CREATE TABLE contact_groups ( " +
+            String contact_groups = "CREATE TABLE IF NOT EXISTS contact_groups  ( " +
                     "id INTEGER  PRIMARY KEY AUTOINCREMENT," +
                     "group_id INTEGER," +
                     "contact_id INTEGER, " +
