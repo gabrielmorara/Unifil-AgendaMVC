@@ -1,4 +1,4 @@
-package main.java.Models;
+package Models;
 
 public class Groups {
     private int group_id;

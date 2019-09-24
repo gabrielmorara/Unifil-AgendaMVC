@@ -1,4 +1,4 @@
-package main.java.Models;
+package Models;
 
 public class Phones {
     @Override

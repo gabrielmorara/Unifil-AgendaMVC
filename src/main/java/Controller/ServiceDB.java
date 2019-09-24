@@ -1,9 +1,9 @@
-package main.java.Controller;
+package Controller;
 
 
-import main.java.Models.Contact;
-import main.java.Models.Groups;
-import main.java.Models.Phones;
+import Models.Contact;
+import Models.Groups;
+import Models.Phones;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

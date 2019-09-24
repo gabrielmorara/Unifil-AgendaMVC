@@ -1,13 +1,13 @@
-package main.java.Controller;
+package Controller;
 
-import main.java.Models.Groups;
+import Models.Groups;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
 
-import static main.java.Controller.ServiceDB.getAllGroups;
-import static main.java.Controller.ServiceDB.selectDBGroups;
+import static Controller.ServiceDB.getAllGroups;
+import static Controller.ServiceDB.selectDBGroups;
 
 public class GroupController {
     private static Scanner scanner = new Scanner(System.in);

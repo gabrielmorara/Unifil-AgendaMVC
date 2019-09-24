@@ -1,4 +1,4 @@
-package main.java.Models;
+package Models;
 
 public class ContactsPhones {
     private int id;

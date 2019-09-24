@@ -1,16 +1,13 @@
-package main.java.Controller;
+package Controller;
 
-import main.java.Models.Groups;
-import main.java.Models.Phones;
-
+import Models.Groups;
+import Models.Phones;
 import java.sql.Connection;
-
 import java.util.List;
 import java.util.Scanner;
-
-import static main.java.Controller.GroupController.getAllgrop;
-import static main.java.Controller.PhoneController.getAllTelefone;
-import static main.java.Controller.ServiceDB.*;
+import static Controller.GroupController.getAllgrop;
+import static Controller.PhoneController.getAllTelefone;
+import static Controller.ServiceDB.*;
 
 
 public class ContactController {

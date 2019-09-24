@@ -1,13 +1,12 @@
-package main.java.Controller;
+package Controller;
 
-
-import main.java.Models.Phones;
+import Models.Phones;
 import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
 
-import static main.java.Controller.ServiceDB.getAllTelefones;
-import static main.java.Controller.ServiceDB.selectDBPhones;
+import static Controller.ServiceDB.getAllTelefones;
+import static Controller.ServiceDB.selectDBPhones;
 
 
 public class PhoneController {

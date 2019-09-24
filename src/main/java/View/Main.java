@@ -1,16 +1,16 @@
-package main.java.View;
+package View;
 
-import main.java.Controller.ConnectionDB;
-import main.java.Controller.ServiceDB;
+import Controller.ConnectionDB;
+import Controller.ServiceDB;
 
 import java.sql.*;
 import java.util.Scanner;
-import static main.java.Controller.ContactController.*;
-import static main.java.Controller.CreateTables.createtables;
-import static main.java.Controller.GroupController.*;
-import static main.java.Controller.PhoneController.*;
-import static main.java.Controller.ServiceDB.getAllGroups;
-import static main.java.Controller.ServiceDB.selectDBContact;
+import static Controller.ContactController.*;
+import static Controller.CreateTables.createtables;
+import static Controller.GroupController.*;
+import static Controller.PhoneController.*;
+import static Controller.ServiceDB.getAllGroups;
+import static Controller.ServiceDB.selectDBContact;
 
 
 public class Main {
