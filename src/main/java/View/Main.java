@@ -99,6 +99,9 @@ public class Main {
                 case 16:
                     removerGroup(connection);
                     break;
+                case 17:
+                    System.out.println(getAllgrop(connection));
+                    break;
                 default:
                     System.out.println("Opção Invalida!");
             }
