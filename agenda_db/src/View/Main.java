@@ -115,7 +115,7 @@ public class Main {
         System.out.println("5 - Desvincular Telefone com Contato");
         System.out.println("6 - Vincular Contato com Grupo");
         System.out.println("7 - Desvincular Contato com Grupo");
-        System.out.println("8 - Listar Todos Contatos");
+        System.out.println("8 - Listar todos os Contatos");
         System.out.println("9 - Listar todos os Telefones");
         System.out.println("10 - Listar todos os Grupos");
         System.out.println("11 - Buscar contato por Id");
@@ -123,6 +123,7 @@ public class Main {
         System.out.println("14 - Remover Contato");
         System.out.println("15 - Remover Telefone");
         System.out.println("16 - Remover Grupo");
+        System.out.println("17 - Listar Contatos por Grupo");
         System.out.println("99 - Encerrar o programa");
     }
 }

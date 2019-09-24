@@ -13,7 +13,7 @@ public class PhoneController {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int inserirTelefone(Connection connection){
+    public static int inserirTelefone(Connection connection) {
         System.out.println("Digite o telefone :");
         String telefoneAdd = scanner.next();
         return ServiceDB.insertTables(connection, ServiceDB.insertPhone(telefoneAdd));
@@ -23,8 +23,14 @@ public class PhoneController {
         return selectDBPhones(getAllTelefones(), connection);
     }
 
-    public static void removerTelefone(Connection connection){
-
+    public static void removerTelefone(Connection connection) {
+        System.out.println(selectDBPhones(getAllTelefones(), connection));
+        System.out.println("Digite o id do telefone para remover : ");
+        int id_contato = scanner.nextInt();
+        ServiceDB.delete("delete from contact_phone where phone_id = " + id_contato + ";",
+                connection);
+        ServiceDB.delete("delete from phones where phone_id = " + id_contato + ";",
+                connection);
     }
 
 }

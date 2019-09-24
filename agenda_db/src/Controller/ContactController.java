@@ -100,7 +100,15 @@ public class ContactController {
     }
 
     public static void removerContact(Connection connection){
-
+        getAllContacts(connection);
+        System.out.println("Digite o id do contato para remover : ");
+        int id_contato = scanner.nextInt();
+        ServiceDB.delete("delete from contact_phone where contact_id = " + id_contato + ";",
+                connection);
+        ServiceDB.delete("delete from contact_groups where contact_id = " + id_contato + ";",
+                connection);
+        ServiceDB.delete("delete from contacts where contact_id = " + id_contato + ";",
+                connection);
     }
 
 }

@@ -38,6 +38,13 @@
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="SQLite - db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="sqlite_master: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="SQLite - db" type="feb32156:DbDataSourceImpl" />
         <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
     </expand>
@@ -145,7 +152,8 @@
       <workItem from="1568067438591" duration="4473000" />
       <workItem from="1568159268071" duration="4809000" />
       <workItem from="1568671900626" duration="4942000" />
-      <workItem from="1568738998953" duration="5615000" />
+      <workItem from="1568738998953" duration="5950000" />
+      <workItem from="1569323763754" duration="877000" />
     </task>
     <servers />
   </component>
