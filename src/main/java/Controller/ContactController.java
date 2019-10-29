@@ -43,12 +43,49 @@ public class ContactController {
         return query.getResultList();
     }
 
-    public static void updatePhones(int id_contato, int id_phone, EntityManager em) {
+    public static Contact getContactByID(int id, EntityManager em) {
+        Contact contact = null;
+        try {
+            contact = em.find(Contact.class, id);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        return contact;
+    }
+
+    public static void updatePhones(int id_contato, int id_phone, EntityManager em, int opt) {
         Contact contact = em.find(Contact.class, id_contato);
         try {
             List<Phones> phones = contact.getPhonesList();
-            phones.add(PhoneController.getPhoneByID(id_phone, em));
+            if (opt == 0) {
+                phones.add(PhoneController.getPhoneByID(id_phone, em));
+            } else {
+                if (opt == 1) {
+                    phones.remove(PhoneController.getPhoneByID(id_phone, em));
+                }
+            }
             contact.setPhonesList(phones);
+            em.getTransaction().begin();
+            em.merge(contact);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+            throw ex;
+        }
+    }
+
+    public static void updateGroups(int id_contato, int id_grupo, EntityManager em, int opt) {
+        Contact contact = em.find(Contact.class, id_contato);
+        try {
+            List<Groups> groups = contact.getGroupsList();
+            if (opt == 0) {
+                groups.add(GroupController.getGroupByID(id_grupo, em));
+            } else {
+                if (opt == 1) {
+                    groups.remove(GroupController.getGroupByID(id_grupo, em));
+                }
+            }
+            contact.setGroupsList(groups);
             em.getTransaction().begin();
             em.merge(contact);
             em.getTransaction().commit();

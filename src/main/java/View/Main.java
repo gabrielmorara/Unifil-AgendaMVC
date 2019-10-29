@@ -7,6 +7,7 @@ import Controller.ServiceDB;
 import Models.Contact;
 import Models.Groups;
 import Models.Phones;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,6 +15,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import static Controller.ServiceDB.*;
 import static Controller.ServiceDB.getContactbyId;
 
@@ -44,15 +46,15 @@ public class Main {
                 case 4:
                     vincularContatoTelefone();
                     break;
-//                case 5:
-//                    desvincularContatoTelefone(connection);
-//                    break;
-//                case 6:
-//                    vincularContatoGrupo(connection);
-//                    break;
-//                case 7:
-//                    desvincularContatoGrupo(connection);
-//                    break;
+                case 5:
+                    desvincularContatoTelefone();
+                    break;
+                case 6:
+                    vincularContatoGrupo();
+                    break;
+                case 7:
+                    desvincularContatoGrupo();
+                    break;
                 case 8:
                     getAllContacts();
                     break;
@@ -62,9 +64,9 @@ public class Main {
                 case 10:
                     getAllGroups();
                     break;
-//                case 11:
-//                    getContactById(connection);
-//                    break;
+                case 11:
+                    getContactById();
+                    break;
 //                case 12:
 //                    getContactByName(connection);
 //                    break;
@@ -80,9 +82,8 @@ public class Main {
 //                case 17:
 //                    System.out.println(getAllgrop(connection));
 //                    break;
-//                default:
-//                    System.out.println("Opção Invalida!");
-//            }
+                default:
+                    System.out.println("Opção Invalida!");
             }
         }
     }
@@ -106,7 +107,6 @@ public class Main {
         System.out.println("17 - Listar Contatos por Grupo");
         System.out.println("99 - Encerrar o programa");
     }
-
 
     public static void inserirContato() {
         System.out.println("Digite o nome :");
@@ -153,39 +153,37 @@ public class Main {
         getAllTelefone();
         System.out.println("Digite o Id do telefone: ");
         int id_phone = scanner.nextInt();
-        ContactController.updatePhones(id_contato, id_phone, em);
+        ContactController.updatePhones(id_contato, id_phone, em, 0);
     }
 
-    public static void vincularContatoGrupo(Connection connection, int id_group, int id_contact) {
-        ServiceDB.insertTables(connection, ServiceDB.insertContactPhone(id_contact, id_group));
-    }
-
-    public static void vincularContatoGrupo(Connection connection) {
-        System.out.println("Digite o id do contato : ");
+    public static void vincularContatoGrupo() {
+        getAllContacts();
+        System.out.println("Digite o Id do contato: ");
         int id_contato = scanner.nextInt();
-        System.out.println("Digite o id do grupo : ");
+        getAllGroups();
+        System.out.println("Digite o Id do grupo : ");
         int id_grupo = scanner.nextInt();
-        ServiceDB.insertTables(connection, ServiceDB.insertGroupsContact(id_grupo, id_contato));
+        ContactController.updateGroups(id_contato, id_grupo, em, 0);
     }
 
-    public static void desvincularContatoTelefone(Connection connection) {
-        System.out.println("Digite o id do contato : ");
+    public static void desvincularContatoTelefone() {
+        getAllContacts();
+        System.out.println("Digite o Id do contato: ");
         int id_contato = scanner.nextInt();
-        System.out.println("Digite o id do telefone : ");
-        System.out.println(ServiceDB.selectDBPhones(getTelefoneByContactId(String.valueOf(id_contato)), connection));
-        int id_telefone = scanner.nextInt();
-        ServiceDB.delete("delete from contact_phone where contact_id = " + id_contato + " and " + " phone_id = " + id_telefone + ";",
-                connection);
+        getAllTelefone();
+        System.out.println("Digite o Id do telefone: ");
+        int id_phone = scanner.nextInt();
+        ContactController.updatePhones(id_contato, id_phone, em, 1);
     }
 
-    public static void desvincularContatoGrupo(Connection connection) {
-        System.out.println("Digite o id do contato : ");
+    public static void desvincularContatoGrupo() {
+        getAllContacts();
+        System.out.println("Digite o Id do contato: ");
         int id_contato = scanner.nextInt();
-        System.out.println("Digite o id do Grupo : ");
-        System.out.println(ServiceDB.selectDBGroups(getGrupoByContactId(String.valueOf(id_contato)), connection));
-        int id_telefone = scanner.nextInt();
-        ServiceDB.delete("delete from contact_groups where contact_id = " + id_contato + " and " + " group_id = " + id_telefone + ";",
-                connection);
+        getAllGroups();
+        System.out.println("Digite o Id do grupo : ");
+        int id_grupo = scanner.nextInt();
+        ContactController.updateGroups(id_contato, id_grupo, em, 1);
     }
 
     public static void getAllContacts() {
@@ -193,17 +191,18 @@ public class Main {
         System.out.println("-----------------------------------------------|");
         List<Contact> results = ContactController.getAllContact(em);
         for (var objeto : results) {
-//            List<Phones> listTelefones = selectDBPhones(getTelefoneByContactId(String.valueOf(objeto.getId())), connection);
-//            List<Groups> listGroups = selectDBGroups(getGrupoByContactId(String.valueOf(objeto.getId())), connection);
             String nomeSobrenome = objeto.getFirstName() + " " + objeto.getLastName();
-            System.out.format("%-6s | %-20s | %-12s | %-20s  \n", objeto.getId(), nomeSobrenome, "", "");
+            System.out.format("%-6s | %-20s | %-12s | %-20s  \n", objeto.getId(), nomeSobrenome, objeto.getPhonesList(), objeto.getGroupsList());
         }
     }
 
-    public static void getContactById(Connection connection) {
-        System.out.println("Digite o id do contato : ");
+    public static void getContactById() {
+        System.out.println("Digite o Id do contato: ");
         int id_contato = scanner.nextInt();
-        System.out.println(ServiceDB.selectDBContact(getContactbyId(id_contato), connection));
+        Contact contact = ContactController.getContactByID(id_contato, em);
+        System.out.format("%-6s | %-20s | %-12s | %-20s  \n", "ID", "NOME", "TELEFONES", "GRUPOS");
+        String nomeSobrenome = contact.getFirstName() + " " + contact.getLastName();
+        System.out.format("%-6s | %-20s | %-12s | %-20s  \n", contact.getId(), nomeSobrenome, contact.getPhonesList(), contact.getGroupsList());
     }
 
     public static void getContactByName(Connection connection) {
@@ -235,8 +234,6 @@ public class Main {
         System.out.println("-----------------------------------------------|");
         List<Groups> results = GroupController.getAllGroups(em);
         for (var objeto : results) {
-//            List<Phones> listTelefones = selectDBPhones(getTelefoneByContactId(String.valueOf(objeto.getId())), connection);
-//            List<Groups> listGroups = selectDBGroups(getGrupoByContactId(String.valueOf(objeto.getId())), connection);
             System.out.format("%-6s | %-20s \n", objeto.getId(), objeto.getName());
         }
     }
