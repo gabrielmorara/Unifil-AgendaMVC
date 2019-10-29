@@ -43,4 +43,18 @@ public class ContactController {
         return query.getResultList();
     }
 
+    public static void updatePhones(int id_contato, int id_phone, EntityManager em) {
+        Contact contact = em.find(Contact.class, id_contato);
+        try {
+            List<Phones> phones = contact.getPhonesList();
+            phones.add(PhoneController.getPhoneByID(id_phone, em));
+            contact.setPhonesList(phones);
+            em.getTransaction().begin();
+            em.merge(contact);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+            throw ex;
+        }
+    }
 }

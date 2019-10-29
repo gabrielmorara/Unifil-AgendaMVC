@@ -1,8 +1,8 @@
 package Controller;
 
 import Models.Contact;
+import Models.Groups;
 import Models.Phones;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -35,5 +35,15 @@ public class PhoneController {
         }
         assert query != null;
         return query.getResultList();
+    }
+
+    public static Phones getPhoneByID(int id, EntityManager em) {
+        Phones phones = null;
+        try {
+            phones = em.find(Phones.class, id);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        return phones;
     }
 }

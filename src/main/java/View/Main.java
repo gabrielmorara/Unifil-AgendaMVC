@@ -7,7 +7,6 @@ import Controller.ServiceDB;
 import Models.Contact;
 import Models.Groups;
 import Models.Phones;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,12 +14,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import static Controller.GroupController.*;
-import static Controller.PhoneController.*;
 import static Controller.ServiceDB.*;
 import static Controller.ServiceDB.getContactbyId;
-
 
 public class Main {
 
@@ -38,48 +33,17 @@ public class Main {
             opcao = scanner.nextInt();
             switch (opcao) {
                 case 1:
-
-                    int id_contact = inserirContato();
-//                    System.out.println(id_contact);
-//                    int aux;
-//                    do {
-//                        int id_telefone = inserirTelefone();
-//                        vincularContatoTelefone(id_contact, id_telefone);
-//                        System.out.println("1 - Cadastrar mais telefone");
-//                        System.out.println("2 - Prosseguir");
-//                        aux = scanner.nextInt();
-//                    } while (aux == 1);
-//                    System.out.println("1 - Vincular a grupo existente");
-//                    System.out.println("2 - Cadastrar novo grupo e vincular");
-//                    System.out.println("3 - Finalizar sem grupo");
-//                    aux = scanner.nextInt();
-//                    if (aux == 1) {
-//                        do {
-//                            System.out.println(selectDBContact(getAllGroups(), connection).toString());
-//                            System.out.println("Digite o id do groupo");
-//                            int id_group = scanner.nextInt();
-//                            vincularContatoGrupo(connection, id_group, id_contact);
-//                            aux = scanner.nextInt();
-//                            System.out.println("1 - Vincular a mais Grupo");
-//                            System.out.println("2 - Finalizar");
-//                        } while (aux == 1);
-//                    }
-//                    if (aux == 2) {
-//                        int id_grupo = inserirGrupo(connection);
-//                        vincularContatoGrupo(connection, id_grupo, id_contact);
-//                    }
-//                    System.out.println("Contato cadastrado com sucesso!");
-//                    System.out.println(ServiceDB.selectDBContact(ServiceDB.getContactbyId(id_contact), connection));
+                    inserirContato();
                     break;
-//                case 2:
-//                    inserirTelefone(connection);
-//                    break;
-//                case 3:
-//                    inserirGrupo(connection);
-//                    break;
-//                case 4:
-//                    vincularContatoTelefone(connection);
-//                    break;
+                case 2:
+                    inserirTelefone();
+                    break;
+                case 3:
+                    inserirGrupo();
+                    break;
+                case 4:
+                    vincularContatoTelefone();
+                    break;
 //                case 5:
 //                    desvincularContatoTelefone(connection);
 //                    break;
@@ -92,12 +56,12 @@ public class Main {
                 case 8:
                     getAllContacts();
                     break;
-//                case 9:
-//                    System.out.println(getAllTelefone(connection));
-//                    break;
-//                case 10:
-//                    System.out.println(getAllgrop(connection));
-//                    break;
+                case 9:
+                    getAllTelefone();
+                    break;
+                case 10:
+                    getAllGroups();
+                    break;
 //                case 11:
 //                    getContactById(connection);
 //                    break;
@@ -144,7 +108,7 @@ public class Main {
     }
 
 
-    public static int inserirContato() {
+    public static void inserirContato() {
         System.out.println("Digite o nome :");
         String firstName = scanner.next();
         System.out.println("Digite o sobrenome :");
@@ -178,29 +142,18 @@ public class Main {
         if (aux == 2) {
             groups.add(inserirGrupo());
         }
+        ContactController.insertContact(firstName, lastName, email, phones, groups, em);
         System.out.println("Contato cadastrado com sucesso!");
-//        System.out.println(ServiceDB.selectDBContact(ServiceDB.getContactbyId(id_contact), connection));
-
-//        if () {
-//            System.out.println("Contato cadastrado com sucesso!");
-//        } else {
-//            System.out.println("Nao foi possivel cadastrar o contato");
-//        }
-
-        return ContactController.insertContact(firstName, lastName, email, phones, groups, em);
     }
 
-    public static void vincularContatoTelefone(Connection connection) {
-        System.out.println("Digite o id do contato : ");
+    public static void vincularContatoTelefone() {
+        getAllContacts();
+        System.out.println("Digite o Id do contato: ");
         int id_contato = scanner.nextInt();
-        System.out.println("Digite o id do telefone : ");
-        System.out.println(getAllTelefone(connection));
+        getAllTelefone();
+        System.out.println("Digite o Id do telefone: ");
         int id_phone = scanner.nextInt();
-        ServiceDB.insertTables(connection, ServiceDB.insertContactPhone(id_contato, id_phone));
-    }
-
-    public static void vincularContatoTelefone(int id_contact, int id_telefone) {
-//        ServiceDB.insertTables(, ServiceDB.insertContactPhone(id_contact, id_telefone));
+        ContactController.updatePhones(id_contato, id_phone, em);
     }
 
     public static void vincularContatoGrupo(Connection connection, int id_group, int id_contact) {
@@ -211,7 +164,6 @@ public class Main {
         System.out.println("Digite o id do contato : ");
         int id_contato = scanner.nextInt();
         System.out.println("Digite o id do grupo : ");
-        System.out.println(getAllgrop(connection));
         int id_grupo = scanner.nextInt();
         ServiceDB.insertTables(connection, ServiceDB.insertGroupsContact(id_grupo, id_contato));
     }
@@ -244,7 +196,7 @@ public class Main {
 //            List<Phones> listTelefones = selectDBPhones(getTelefoneByContactId(String.valueOf(objeto.getId())), connection);
 //            List<Groups> listGroups = selectDBGroups(getGrupoByContactId(String.valueOf(objeto.getId())), connection);
             String nomeSobrenome = objeto.getFirstName() + " " + objeto.getLastName();
-            System.out.format("%-6s | %-20s | %-12s | %-20s  \n", objeto.getId(), nomeSobrenome);
+            System.out.format("%-6s | %-20s | %-12s | %-20s  \n", objeto.getId(), nomeSobrenome, "", "");
         }
     }
 
@@ -278,12 +230,19 @@ public class Main {
         return GroupController.insertGroup(nome_grupo, em);
     }
 
-    public static List<Groups> getAllgrop(Connection connection) {
-        return selectDBGroups(getAllGroups(), connection);
+    public static void getAllGroups() {
+        System.out.format("%-6s | %-20s \n", "ID", "NOME");
+        System.out.println("-----------------------------------------------|");
+        List<Groups> results = GroupController.getAllGroups(em);
+        for (var objeto : results) {
+//            List<Phones> listTelefones = selectDBPhones(getTelefoneByContactId(String.valueOf(objeto.getId())), connection);
+//            List<Groups> listGroups = selectDBGroups(getGrupoByContactId(String.valueOf(objeto.getId())), connection);
+            System.out.format("%-6s | %-20s \n", objeto.getId(), objeto.getName());
+        }
     }
 
     public static void removerGroup(Connection connection) {
-        System.out.println(selectDBGroups(getAllGroups(), connection));
+        System.out.println(selectDBGroups(ServiceDB.getAllGroups(), connection));
         System.out.println("Digite o id do grupo para remover : ");
         int id_contato = scanner.nextInt();
         ServiceDB.delete("delete from contact_groups where contact_id = " + id_contato + ";",
@@ -298,8 +257,13 @@ public class Main {
         return PhoneController.insertPhone(telefoneAdd, em);
     }
 
-    public static List<Phones> getAllTelefone(Connection connection) {
-        return selectDBPhones(getAllTelefones(), connection);
+    public static void getAllTelefone() {
+        System.out.format("%-6s | %-20s \n", "ID", "TELEFONE");
+        System.out.println("-----------------------------------------------|");
+        List<Phones> results = PhoneController.getAllPhones(em);
+        for (var objeto : results) {
+            System.out.format("%-6s | %-20s \n", objeto.getId(), objeto.getPhone());
+        }
     }
 
     public static void removerTelefone(Connection connection) {
