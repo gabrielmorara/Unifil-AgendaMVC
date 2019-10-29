@@ -1,9 +1,7 @@
 package Models;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Contact {
@@ -68,6 +66,26 @@ public class Contact {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Groups> getGroupsList() {
+        return groupsList;
+    }
+
+    public void setGroupsList(List<Groups> groupsList) {
+        this.groupsList = groupsList;
+    }
+
+    public List<Phones> getPhonesList() {
+        return phonesList;
+    }
+
+    public void setPhonesList(List<Phones> phonesList) {
+        this.phonesList = phonesList;
     }
 
     @Override

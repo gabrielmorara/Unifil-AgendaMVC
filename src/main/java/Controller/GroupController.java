@@ -1,35 +1,47 @@
 package Controller;
 
 import Models.Groups;
-
-import java.sql.Connection;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Scanner;
-
-import static Controller.ServiceDB.getAllGroups;
-import static Controller.ServiceDB.selectDBGroups;
 
 public class GroupController {
-    private static Scanner scanner = new Scanner(System.in);
 
-    public static int inserirGrupo(Connection connection) {
-        System.out.println("Digit o nome do grupo: ");
-        String nome_grupo = scanner.next();
-        return ServiceDB.insertTables(connection, ServiceDB.insertGroup(nome_grupo));
+    public static Groups insertGroup(String name, EntityManager em) {
+        Groups groups = new Groups();
+        try {
+            groups.setName(name);
+            em.getTransaction().begin();
+            em.persist(groups);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+            throw ex;
+        }
+        return groups;
     }
 
-    public static List<Groups> getAllgrop(Connection connection) {
-        return selectDBGroups(getAllGroups(), connection);
+    public static List<Groups> getAllGroups(EntityManager em) {
+        TypedQuery<Groups> query = null;
+        try {
+            query = em.createQuery(
+                    "SELECT c FROM Groups AS c", Groups.class
+            );
+            List<Groups> results = query.getResultList();
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        assert query != null;
+        return query.getResultList();
     }
 
-    public static void removerGroup(Connection connection) {
-        System.out.println(selectDBGroups(getAllGroups(), connection));
-        System.out.println("Digite o id do grupo para remover : ");
-        int id_contato = scanner.nextInt();
-        ServiceDB.delete("delete from contact_groups where contact_id = " + id_contato + ";",
-                connection);
-        ServiceDB.delete("delete from groups where group_id = " + id_contato + ";",
-                connection);
+    public static Groups getGroupByID(int id, EntityManager em) {
+        Groups group = null;
+        try {
+            group = em.find(Groups.class, id);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        return group;
     }
-
 }

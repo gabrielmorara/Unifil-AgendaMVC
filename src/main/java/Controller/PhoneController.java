@@ -1,36 +1,39 @@
 package Controller;
 
+import Models.Contact;
 import Models.Phones;
-import java.sql.Connection;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Scanner;
-
-import static Controller.ServiceDB.getAllTelefones;
-import static Controller.ServiceDB.selectDBPhones;
-
 
 public class PhoneController {
 
-    private static Scanner scanner = new Scanner(System.in);
-
-    public static int inserirTelefone(Connection connection) {
-        System.out.println("Digite o telefone :");
-        String telefoneAdd = scanner.next();
-        return ServiceDB.insertTables(connection, ServiceDB.insertPhone(telefoneAdd));
+    public static Phones insertPhone(String number, EntityManager em) {
+        Phones phone = new Phones();
+        try {
+            phone.setPhone(number);
+            em.getTransaction().begin();
+            em.persist(phone);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+            throw ex;
+        }
+        return phone;
     }
 
-    public static List<Phones> getAllTelefone(Connection connection) {
-        return selectDBPhones(getAllTelefones(), connection);
+    public static List<Phones> getAllPhones(EntityManager em) {
+        TypedQuery<Phones> query = null;
+        try {
+            query = em.createQuery(
+                    "SELECT c FROM Phones AS c", Phones.class
+            );
+            List<Phones> results = query.getResultList();
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        assert query != null;
+        return query.getResultList();
     }
-
-    public static void removerTelefone(Connection connection) {
-        System.out.println(selectDBPhones(getAllTelefones(), connection));
-        System.out.println("Digite o id do telefone para remover : ");
-        int id_contato = scanner.nextInt();
-        ServiceDB.delete("delete from contact_phone where phone_id = " + id_contato + ";",
-                connection);
-        ServiceDB.delete("delete from phones where phone_id = " + id_contato + ";",
-                connection);
-    }
-
 }
