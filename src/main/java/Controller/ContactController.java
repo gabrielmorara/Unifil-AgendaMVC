@@ -77,10 +77,10 @@ public class ContactController {
         System.out.format("%-6s | %-20s | %-12s | %-20s  \n", "ID", "NOME", "TELEFONES", "GRUPOS");
         System.out.println("-----------------------------------------------|");
         for (var objeto : selectDBContact(getAllcontacts(), connection)) {
-            List<Phones> listTelefones = selectDBPhones(getTelefoneByContactId(String.valueOf(objeto.getContact_id())), connection);
-            List<Groups> listGroups = selectDBGroups(getGrupoByContactId(String.valueOf(objeto.getContact_id())), connection);
+            List<Phones> listTelefones = selectDBPhones(getTelefoneByContactId(String.valueOf(objeto.getId())), connection);
+            List<Groups> listGroups = selectDBGroups(getGrupoByContactId(String.valueOf(objeto.getId())), connection);
             String nomeSobrenome = objeto.getFirstName() + " " + objeto.getLastName();
-            System.out.format("%-6s | %-20s | %-12s | %-20s  \n", objeto.getContact_id(), nomeSobrenome, listTelefones, listGroups);
+            System.out.format("%-6s | %-20s | %-12s | %-20s  \n", objeto.getId(), nomeSobrenome, listTelefones, listGroups);
         }
     }
 

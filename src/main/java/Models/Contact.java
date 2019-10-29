@@ -1,24 +1,38 @@
 package Models;
 
+import javax.persistence.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Entity
 public class Contact {
-    private int contact_id;
+
+    @Id
+    private Integer id;
     private String firstName;
     private String lastName;
     private String email;
 
+    public Contact() {
+
+    }
+
     public Contact(int id, String firstName, String lastName, String email) {
-        this.contact_id = id;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    public int getContact_id() {
-        return contact_id;
+    public int getId() {
+        return id;
     }
 
-    public void setContact_id(int contact_id) {
-        this.contact_id = contact_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -45,11 +59,10 @@ public class Contact {
         this.email = email;
     }
 
-
     @Override
     public String toString() {
         return "Models.Contact{" +
-                "contact_id=" + contact_id +
+                "contact_id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

@@ -2,9 +2,14 @@ package View;
 
 import Controller.ConnectionDB;
 import Controller.ServiceDB;
+import Models.Contact;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.sql.*;
 import java.util.Scanner;
+
 import static Controller.ContactController.*;
 import static Controller.CreateTables.createtables;
 import static Controller.GroupController.*;
@@ -18,94 +23,113 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws SQLException {
-        Connection connection = ConnectionDB.createConnection();
-        createtables(connection);
-        int opcao = 0;
-        while (opcao != 99) {
-            getMenu();
-            opcao = scanner.nextInt();
-            switch (opcao) {
-                case 1:
-                    int id_contact = inserirContato(connection);
-                    int aux;
-                    do {
-                        int id_telefone = inserirTelefone(connection);
-                        vincularContatoTelefone(connection, id_contact, id_telefone);
-                        System.out.println("1 - Cadastrar mais telefone");
-                        System.out.println("2 - Prosseguir");
-                        aux = scanner.nextInt();
-                    } while (aux == 1);
-                    System.out.println("1 - Vincular a grupo existente");
-                    System.out.println("2 - Cadastrar novo grupo e vincular");
-                    System.out.println("3 - Finalizar sem grupo");
-                    aux = scanner.nextInt();
-                    if (aux == 1) {
-                        do {
-                            System.out.println(selectDBContact(getAllGroups(), connection).toString());
-                            System.out.println("Digite o id do groupo");
-                            int id_group = scanner.nextInt();
-                            vincularContatoGrupo(connection, id_group, id_contact);
-                            aux = scanner.nextInt();
-                            System.out.println("1 - Vincular a mais Grupo");
-                            System.out.println("2 - Finalizar");
-                        } while (aux == 1);
-                    }
-                    if (aux == 2) {
-                        int id_grupo = inserirGrupo(connection);
-                        vincularContatoGrupo(connection, id_grupo, id_contact);
-                    }
-                    System.out.println("Contato cadastrado com sucesso!");
-                    System.out.println(ServiceDB.selectDBContact(ServiceDB.getContactbyId(id_contact), connection));
-                    break;
-                case 2:
-                    inserirTelefone(connection);
-                    break;
-                case 3:
-                    inserirGrupo(connection);
-                    break;
-                case 4:
-                    vincularContatoTelefone(connection);
-                    break;
-                case 5:
-                    desvincularContatoTelefone(connection);
-                    break;
-                case 6:
-                    vincularContatoGrupo(connection);
-                    break;
-                case 7:
-                    desvincularContatoGrupo(connection);
-                    break;
-                case 8:
-                    getAllContacts(connection);
-                    break;
-                case 9:
-                    System.out.println(getAllTelefone(connection));
-                    break;
-                case 10:
-                    System.out.println(getAllgrop(connection));
-                    break;
-                case 11:
-                    getContactById(connection);
-                    break;
-                case 12:
-                    getContactByName(connection);
-                    break;
-                case 14:
-                    removerContact(connection);
-                    break;
-                case 15:
-                    removerTelefone(connection);
-                    break;
-                case 16:
-                    removerGroup(connection);
-                    break;
-                case 17:
-                    System.out.println(getAllgrop(connection));
-                    break;
-                default:
-                    System.out.println("Opção Invalida!");
-            }
+//        Connection connection = ConnectionDB.createConnection();
+//        createtables(connection);
+//        int opcao = 0;
+//        while (opcao != 99) {
+//            getMenu();
+//            opcao = scanner.nextInt();
+//            switch (opcao) {
+//                case 1:
+//                    int id_contact = inserirContato(connection);
+//                    int aux;
+//                    do {
+//                        int id_telefone = inserirTelefone(connection);
+//                        vincularContatoTelefone(connection, id_contact, id_telefone);
+//                        System.out.println("1 - Cadastrar mais telefone");
+//                        System.out.println("2 - Prosseguir");
+//                        aux = scanner.nextInt();
+//                    } while (aux == 1);
+//                    System.out.println("1 - Vincular a grupo existente");
+//                    System.out.println("2 - Cadastrar novo grupo e vincular");
+//                    System.out.println("3 - Finalizar sem grupo");
+//                    aux = scanner.nextInt();
+//                    if (aux == 1) {
+//                        do {
+//                            System.out.println(selectDBContact(getAllGroups(), connection).toString());
+//                            System.out.println("Digite o id do groupo");
+//                            int id_group = scanner.nextInt();
+//                            vincularContatoGrupo(connection, id_group, id_contact);
+//                            aux = scanner.nextInt();
+//                            System.out.println("1 - Vincular a mais Grupo");
+//                            System.out.println("2 - Finalizar");
+//                        } while (aux == 1);
+//                    }
+//                    if (aux == 2) {
+//                        int id_grupo = inserirGrupo(connection);
+//                        vincularContatoGrupo(connection, id_grupo, id_contact);
+//                    }
+//                    System.out.println("Contato cadastrado com sucesso!");
+//                    System.out.println(ServiceDB.selectDBContact(ServiceDB.getContactbyId(id_contact), connection));
+//                    break;
+//                case 2:
+//                    inserirTelefone(connection);
+//                    break;
+//                case 3:
+//                    inserirGrupo(connection);
+//                    break;
+//                case 4:
+//                    vincularContatoTelefone(connection);
+//                    break;
+//                case 5:
+//                    desvincularContatoTelefone(connection);
+//                    break;
+//                case 6:
+//                    vincularContatoGrupo(connection);
+//                    break;
+//                case 7:
+//                    desvincularContatoGrupo(connection);
+//                    break;
+//                case 8:
+//                    getAllContacts(connection);
+//                    break;
+//                case 9:
+//                    System.out.println(getAllTelefone(connection));
+//                    break;
+//                case 10:
+//                    System.out.println(getAllgrop(connection));
+//                    break;
+//                case 11:
+//                    getContactById(connection);
+//                    break;
+//                case 12:
+//                    getContactByName(connection);
+//                    break;
+//                case 14:
+//                    removerContact(connection);
+//                    break;
+//                case 15:
+//                    removerTelefone(connection);
+//                    break;
+//                case 16:
+//                    removerGroup(connection);
+//                    break;
+//                case 17:
+//                    System.out.println(getAllgrop(connection));
+//                    break;
+//                default:
+//                    System.out.println("Opção Invalida!");
+//            }
+//        }
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda-db");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            Contact contact = new Contact();
+            contact.setFirstName("firstName");
+            contact.setLastName("lastName");
+            contact.setEmail("email");
+            em.persist(contact);
+
+        } catch (Exception ex) {
+            // Deu pau
+            System.out.println("deu pau " + ex.getMessage());
+        } finally {
+            em.close();
+            emf.close();
         }
+
     }
 
     private static void getMenu() {
