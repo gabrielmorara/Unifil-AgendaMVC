@@ -117,10 +117,10 @@ public class ServiceDB {
         List<Groups> list = new ArrayList<>();
         try (Statement statement = conn.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                list.add(new Groups(resultSet.getInt("group_id"),
-                        resultSet.getString("name")));
-            }
+//            while (resultSet.next()) {
+//                list.add(new Groups(resultSet.getInt("group_id"),
+//                        resultSet.getString("name"), contacts));
+//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

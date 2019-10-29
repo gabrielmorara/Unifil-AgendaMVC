@@ -1,28 +1,47 @@
 package Models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
 public class Phones {
-    @Override
-    public String toString() {
-        return "Phones{" +
-                "phone_id=" + phone_id +
-                ", phone='" + phone + '\'' +
-                '}';
+
+    @Id
+    private Integer id;
+    private String phone;
+    @ManyToMany(mappedBy = "phonesList")
+    private Set<Contact> listContacts = new HashSet<>();
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    private int phone_id;
-    private String phone;
+    public Set<Contact> getListContacts() {
+        return listContacts;
+    }
+
+    public void setListContacts(Set<Contact> listContacts) {
+        this.listContacts = listContacts;
+    }
+
+    public Phones() {
+
+    }
 
     public Phones(int phone_id, String phone) {
-        this.phone_id = phone_id;
+        this.id = phone_id;
         this.phone = phone;
     }
 
-    public int getPhone_id() {
-        return phone_id;
+    public int getId() {
+        return id;
     }
 
-    public void setPhone_id(int phone_id) {
-        this.phone_id = phone_id;
+    public void setId(int phone_id) {
+        this.id = phone_id;
     }
 
     public String getPhone() {
@@ -31,5 +50,13 @@ public class Phones {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Phones{" +
+                "phone_id=" + id +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

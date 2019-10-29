@@ -7,7 +7,9 @@ import Models.Contact;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import java.sql.*;
+import java.util.List;
 import java.util.Scanner;
 
 import static Controller.ContactController.*;
@@ -120,7 +122,14 @@ public class Main {
             contact.setFirstName("firstName");
             contact.setLastName("lastName");
             contact.setEmail("email");
+            em.getTransaction().begin();
             em.persist(contact);
+            em.getTransaction().commit();
+            TypedQuery<Contact> query = em.createQuery(
+                    "SELECT c FROM Contact AS c", Contact.class
+            );
+            List<Contact> results = query.getResultList();
+            System.out.println(results);
 
         } catch (Exception ex) {
             // Deu pau

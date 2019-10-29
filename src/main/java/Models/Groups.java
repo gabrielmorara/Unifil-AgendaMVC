@@ -1,20 +1,48 @@
 package Models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Entity
 public class Groups {
-    private int group_id;
+
+    @Id
+    private Integer id;
     private String name;
+    @ManyToMany(mappedBy = "groupsList")
+    private Set<Contact> listContacts = new HashSet<>();
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Set<Contact> getListContacts() {
+        return listContacts;
+    }
+
+    public void setListContacts(Set<Contact> listContacts) {
+        this.listContacts = listContacts;
+    }
 
     public Groups(int group_id, String name) {
-        this.group_id = group_id;
+        this.id = group_id;
         this.name = name;
     }
 
-    public int getGroup_id() {
-        return group_id;
+    public Groups() {
+
     }
 
-    public void setGroup_id(int group_id) {
-        this.group_id = group_id;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -28,8 +56,9 @@ public class Groups {
     @Override
     public String toString() {
         return "Groups{" +
-                "group_id=" + group_id +
+                "group_id=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }

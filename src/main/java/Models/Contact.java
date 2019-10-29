@@ -1,23 +1,34 @@
 package Models;
 
 import javax.persistence.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 @Entity
 public class Contact {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String firstName;
     private String lastName;
     private String email;
 
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "ContactsGroups", joinColumns = @JoinColumn(name = "Contact_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "Group_Id", referencedColumnName = "id"))
+    private List<Groups> groupsList;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "ContactsPhones", joinColumns = @JoinColumn(name = "Contact_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "Phone_Id", referencedColumnName = "id"))
+    private List<Phones> phonesList;
+
     public Contact() {
 
+    }
+
+    public Contact(int contactId){
+        this.id = contactId;
     }
 
     public Contact(int id, String firstName, String lastName, String email) {
