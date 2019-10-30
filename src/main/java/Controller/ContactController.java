@@ -6,6 +6,7 @@ import Models.Phones;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactController {
@@ -93,5 +94,25 @@ public class ContactController {
             System.out.println("Erro: " + ex.getMessage());
             throw ex;
         }
+    }
+
+    public static void removeContact(int id_contato, EntityManager em) {
+        Contact contact = null;
+        try {
+            contact = em.find(Contact.class, id_contato);
+            em.remove(contact);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+    }
+
+    public static List<Contact> getContactByName(String firstNome, EntityManager em) {
+        List<Contact> contacts = new ArrayList<>();
+        try {
+            contacts = em.createQuery("select a from Contact AS a where firstName like \'%" + firstNome + "%'", Contact.class).getResultList();
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        return contacts;
     }
 }

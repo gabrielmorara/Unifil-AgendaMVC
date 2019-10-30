@@ -1,6 +1,9 @@
 package Controller;
 
+import Models.Contact;
 import Models.Groups;
+import com.sun.xml.bind.v2.model.core.ID;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -43,5 +46,16 @@ public class GroupController {
             System.out.println("Erro: " + ex.getMessage());
         }
         return group;
+    }
+
+    public static void removeGroup(int id, EntityManager em) {
+        Groups group = null;
+        try {
+            em.getTransaction().begin();
+            em.remove(em.getReference(Groups.class, id));
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
     }
 }

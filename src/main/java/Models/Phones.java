@@ -54,9 +54,6 @@ public class Phones {
 
     @Override
     public String toString() {
-        return "Phones{" +
-                "phone_id=" + id +
-                ", phone='" + phone + '\'' +
-                '}';
+        return phone;
     }
 }

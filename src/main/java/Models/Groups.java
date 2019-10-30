@@ -54,9 +54,6 @@ public class Groups {
 
     @Override
     public String toString() {
-        return "Groups{" +
-                "group_id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return name;
     }
 }

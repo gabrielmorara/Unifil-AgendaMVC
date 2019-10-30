@@ -3,6 +3,7 @@ package Controller;
 import Models.Contact;
 import Models.Groups;
 import Models.Phones;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -45,5 +46,15 @@ public class PhoneController {
             System.out.println("Erro: " + ex.getMessage());
         }
         return phones;
+    }
+
+    public static void removePhone(int id, EntityManager em) {
+        Phones phone = null;
+        try {
+            phone = em.find(Phones.class, id);
+            em.remove(phone);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
     }
 }
